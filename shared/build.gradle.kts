@@ -13,7 +13,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -24,12 +24,13 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.koin.core)
         }
     }
 }
