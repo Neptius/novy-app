@@ -13,6 +13,7 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		B02DBEA22D8ACC55008C0D4E /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */; };
 		B0E697482D8AD0F7003897AB /* DebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E697472D8AD0ED003897AB /* DebugScreen.swift */; };
+		B0E6974B2D8AE897003897AB /* TodosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6974A2D8AE88D003897AB /* TodosScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		B0E697472D8AD0ED003897AB /* DebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugScreen.swift; sourceTree = "<group>"; };
+		B0E6974A2D8AE88D003897AB /* TodosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +76,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				B0E697472D8AD0ED003897AB /* DebugScreen.swift */,
-				B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */,
+				B0E697492D8AE87A003897AB /* Screens */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -91,6 +92,16 @@
 				AB3632DC29227652001CCB65 /* Config.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		B0E697492D8AE87A003897AB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B0E6974A2D8AE88D003897AB /* TodosScreen.swift */,
+				B0E697472D8AD0ED003897AB /* DebugScreen.swift */,
+				B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B02DBEA22D8ACC55008C0D4E /* DebugView.swift in Sources */,
+				B0E6974B2D8AE897003897AB /* TodosScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				B0E697482D8AD0F7003897AB /* DebugScreen.swift in Sources */,

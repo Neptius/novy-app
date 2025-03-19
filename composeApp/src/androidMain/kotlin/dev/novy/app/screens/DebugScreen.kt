@@ -1,7 +1,5 @@
-package dev.novy.app
+package dev.novy.app.screens
 
-import android.widget.Toolbar
-import androidx.annotation.ContentView
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +11,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import dev.novy.app.Platform
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

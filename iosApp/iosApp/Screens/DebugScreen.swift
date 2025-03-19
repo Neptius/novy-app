@@ -8,3 +8,7 @@ struct DebugScreen: View {
         }
     }
 }
+
+#Preview {
+    DebugScreen()
+}
