@@ -33,17 +33,16 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
-            implementation(libs.koin.android)
         }
     }
 }
 
 android {
-    namespace = "fr.novy.app"
+    namespace = "dev.novy.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "fr.novy.app"
+        applicationId = "dev.novy.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

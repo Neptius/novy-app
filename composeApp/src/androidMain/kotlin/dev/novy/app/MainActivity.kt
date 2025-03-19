@@ -1,4 +1,4 @@
-package fr.novy.app
+package dev.novy.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App()
+            DebugScreen()
         }
     }
 }
@@ -19,5 +19,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    DebugScreen()
 }

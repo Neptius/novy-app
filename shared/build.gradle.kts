@@ -13,7 +13,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-
+    
     listOf(
         iosX64(),
         iosArm64(),
@@ -24,19 +24,16 @@ kotlin {
             isStatic = true
         }
     }
-
+    
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.koin.core)
         }
     }
 }
 
 android {
-    namespace = "fr.novy.app.shared"
+    namespace = "dev.novy.app.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
