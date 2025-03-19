@@ -2,8 +2,25 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
+    
+    @State private var shouldOpenDebug = false
+    
     var body: some View {
-        TodosScreen(viewModel: .init())
+        NavigationStack {
+            TodosScreen(viewModel: .init())
+                .toolbar {
+                    ToolbarItem {
+                        Button {
+                            shouldOpenDebug = true
+                        } label: {
+                            Label("Debug", systemImage: "info.circle").labelStyle(.titleAndIcon)
+                        }
+                        .popover(isPresented: $shouldOpenDebug) {
+                            DebugScreen()
+                        }
+                    }
+                }
+        }
     }
 }
 

@@ -41,7 +41,7 @@ struct TodosScreen: View {
             
             if(!viewModel.todosState.todos.isEmpty) {
                 ScrollView {
-                    LazyVStack (spacing: 10) {
+                    LazyVStack (alignment: .leading, spacing: 10) {
                         ForEach(viewModel.todosState.todos, id: \.self) { todo in
                             TodoItemView(todo: todo)
                         }
@@ -70,7 +70,7 @@ struct TodoItemView: View {
             Text(todo.title)
                 .font(.title)
                 .fontWeight(.bold)
-            Text(todo.description)
+            Text(todo.description_)
         }
     }
 }

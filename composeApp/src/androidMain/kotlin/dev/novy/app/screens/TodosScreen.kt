@@ -9,9 +9,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.IconButton
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -28,12 +32,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun TodosScreen(
+    onDebugButtonClick: () -> Unit,
     todosViewModel: TodosViewModel
 ) {
     val todosState = todosViewModel.todosState.collectAsState()
 
     Column {
-        AppBar()
+        AppBar(onDebugButtonClick)
         if (todosState.value.loading)
             Loader()
         else if (todosState.value.error != null)
@@ -44,9 +49,19 @@ fun TodosScreen(
 }
 
 @Composable
-private fun AppBar() {
+private fun AppBar(
+    onDebugButtonClick: () -> Unit,
+) {
     TopAppBar(
-        title = { Text("Todos") }
+        title = { Text("Todos") },
+        actions = {
+            IconButton(onClick = onDebugButtonClick) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = "Debug Info Button",
+                )
+            }
+        }
     )
 }
 

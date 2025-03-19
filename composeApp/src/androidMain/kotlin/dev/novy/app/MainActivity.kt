@@ -25,15 +25,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colors.background
                 ) {
-                    TodosScreen(todosViewModel = todosViewModel)
+                    AppScaffold(todosViewModel)
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    DebugScreen()
 }

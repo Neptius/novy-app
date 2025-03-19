@@ -5,9 +5,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,19 +21,31 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun DebugScreen() {
+fun DebugScreen(
+    onUpButtonClick: () -> Unit,
+) {
     MaterialTheme {
         Column {
-            Toolbar()
+            Toolbar(onUpButtonClick)
             Content()
         }
     }
 }
 
 @Composable
-private fun Toolbar() {
+private fun Toolbar(
+    onUpButtonClick: () -> Unit,
+) {
     TopAppBar(
-        title = { Text("Debug Screen") }
+        title = { Text("Debug Screen") },
+        actions = {
+            IconButton(onClick = onUpButtonClick) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                    contentDescription = "Up Button",
+                )
+            }
+        }
     )
 }
 
