@@ -1,5 +1,6 @@
 package dev.novy.app.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -84,9 +85,14 @@ private fun TodosListView(
 
 @Composable
 private fun TodoView(
-    todo: Todo
+    todo: Todo,
+    todosViewModel: TodosViewModel = koinViewModel()
 ) {
-    Column {
+    Column(
+        modifier = Modifier.clickable {
+            todosViewModel.removeTodo(title = todo.title)
+        }
+    ) {
         Text(text = todo.title)
         Text(text = todo.description)
     }
