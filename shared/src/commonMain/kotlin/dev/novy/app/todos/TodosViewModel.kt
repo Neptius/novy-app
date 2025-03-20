@@ -7,9 +7,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 open class TodosViewModel : ViewModel(), KoinComponent {
-    private val _todosState = MutableStateFlow(viewModelScope, TodosState(loading = true))
-
     private val todosUseCase: TodosUseCase by inject()
+
+    private val _todosState = MutableStateFlow(viewModelScope, TodosState(loading = true))
 
     @NativeCoroutinesState
     val todosState = _todosState.asStateFlow()
@@ -23,6 +23,12 @@ open class TodosViewModel : ViewModel(), KoinComponent {
             val fetchedTodos = todosUseCase.getTodos()
 
             _todosState.update { it.copy(todos = fetchedTodos, loading = false) }
+        }
+    }
+
+    fun removeTodo(title: String) {
+        viewModelScope.launch {
+            _todosState.update { it.copy(todos = it.todos.filter { it.title != title }) }
         }
     }
 }

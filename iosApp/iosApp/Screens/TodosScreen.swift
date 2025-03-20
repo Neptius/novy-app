@@ -42,11 +42,16 @@ struct AppBar: View {
 struct TodoItemView: View {
     var todo: Todo
     
+    @StateViewModel var viewModel = TodosViewModel()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(todo.title)
                 .font(.title)
                 .fontWeight(.bold)
+                .onTapGesture {
+                    viewModel.removeTodo(title: todo.title)
+                }
             Text(todo.description_)
         }
     }
