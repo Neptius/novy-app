@@ -1,31 +1,10 @@
 import SwiftUI
+import KMPObservableViewModelSwiftUI
 import Shared
-
-extension TodosScreen {
-    @MainActor
-    class TodosViewModelWrapper: ObservableObject {
-        let todosViewModel: TodosViewModel
-        
-        init() {
-            todosViewModel = TodosViewModel()
-            todosState = todosViewModel.todosState.value
-        }
-        
-        @Published var todosState: TodosState
-        
-        func startObserving() {
-            Task {
-                for await todosS in todosViewModel.todosState {
-                    self.todosState = todosS
-                }
-            }
-        }
-    }
-}
 
 struct TodosScreen: View {
     
-    @ObservedObject private(set) var viewModel: TodosViewModelWrapper
+    @StateViewModel var viewModel = TodosViewModel()
     
     var body: some View {
         VStack {
@@ -48,8 +27,6 @@ struct TodosScreen: View {
                     }
                 }
             }
-        }.onAppear {
-            self.viewModel.startObserving()
         }
     }
 }
@@ -90,5 +67,5 @@ struct ErrorMessage: View {
 }
 
 #Preview {
-    TodosScreen(viewModel: .init())
+    TodosScreen()
 }

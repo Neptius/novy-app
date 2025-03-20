@@ -30,10 +30,12 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(projects.shared)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.compose)
-            implementation(projects.shared)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
     }
 }

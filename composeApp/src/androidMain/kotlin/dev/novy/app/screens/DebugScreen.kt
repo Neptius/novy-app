@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.novy.app.Platform
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
 
 @Composable
 @Preview
@@ -63,8 +64,9 @@ private fun Content() {
 
 }
 
+@Composable
 private fun makeItems(): List<Pair<String, String>> {
-    val platform = Platform()
+    val platform = koinInject<Platform>()
     platform.logSystemInfo()
 
     return listOf(

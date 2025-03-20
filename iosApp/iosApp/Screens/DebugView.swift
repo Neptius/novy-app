@@ -8,7 +8,7 @@ struct DebugView: View {
     }
 
     private let items: [RowItem] = {
-      let platform = Platform()
+      let platform = getPlatform()
       platform.logSystemInfo()
 
       var result: [RowItem] = [

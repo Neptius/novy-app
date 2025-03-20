@@ -28,13 +28,16 @@ import androidx.compose.ui.unit.sp
 import dev.novy.app.todos.Todo
 import dev.novy.app.todos.TodosViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.androidx.compose.koinViewModel
+import androidx.fragment.app.viewModels
 
 @Composable
 @Preview
 fun TodosScreen(
     onDebugButtonClick: () -> Unit,
-    todosViewModel: TodosViewModel
+    todosViewModel: TodosViewModel = koinViewModel()
 ) {
+
     val todosState = todosViewModel.todosState.collectAsState()
 
     Column {

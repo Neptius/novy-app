@@ -1,45 +1,28 @@
 package dev.novy.app.todos
 
-import dev.novy.app.BaseViewModel
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.rickclephas.kmp.observableviewmodel.*
+import kotlinx.coroutines.flow.*
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class TodosViewModel : BaseViewModel() {
-    private val _todosState: MutableStateFlow<TodosState> =
-        MutableStateFlow(TodosState(loading = true))
+open class TodosViewModel : ViewModel(), KoinComponent {
+    private val _todosState = MutableStateFlow(viewModelScope, TodosState(loading = true))
 
-    val todosState: StateFlow<TodosState> get() = _todosState
+    private val todosUseCase: TodosUseCase by inject()
 
-    private val todosUseCase: TodosUseCase
+    @NativeCoroutinesState
+    val todosState = _todosState.asStateFlow()
 
     init {
-        val httpClient = HttpClient {
-            install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                })
-            }
-        }
-
-        val todosService = TodosService(httpClient)
-        todosUseCase = TodosUseCase(todosService)
-
         getTodos()
     }
 
     private fun getTodos() {
-        scope.launch {
+        viewModelScope.launch {
             val fetchedTodos = todosUseCase.getTodos()
 
-            _todosState.emit(TodosState(todos = fetchedTodos))
+            _todosState.update { it.copy(todos = fetchedTodos, loading = false) }
         }
     }
 }

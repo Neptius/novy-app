@@ -3,7 +3,7 @@ package dev.novy.app
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,28 +12,30 @@ import androidx.navigation.compose.rememberNavController
 import dev.novy.app.screens.DebugScreen
 import dev.novy.app.screens.TodosScreen
 import dev.novy.app.screens.Screens
-import dev.novy.app.todos.TodosViewModel
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
 
 @Composable
-fun AppScaffold(todosViewModel: TodosViewModel) {
+@Preview
+fun App() {
     val navController = rememberNavController()
 
-    Scaffold {
-        AppNavHost(
-            navController = navController,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            todosViewModel = todosViewModel
-        )
+    KoinContext {
+        Scaffold {
+            AppNavHost(
+                navController = navController,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+            )
+        }
     }
 }
 
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    modifier: Modifier = Modifier,
-    todosViewModel: TodosViewModel
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
@@ -44,8 +46,7 @@ fun AppNavHost(
             TodosScreen(
                 onDebugButtonClick = {
                     navController.navigate(Screens.DEBUG.route)
-                },
-                todosViewModel = todosViewModel
+                }
             )
         }
 

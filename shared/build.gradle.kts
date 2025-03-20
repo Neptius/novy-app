@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     id("co.touchlab.skie") version "0.10.1"
     kotlin("plugin.serialization") version "2.1.10"
+    id("com.google.devtools.ksp") version "2.1.10-1.0.29"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-39"
 }
 
 kotlin {
@@ -28,12 +30,19 @@ kotlin {
     }
     
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
+
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
+            api(libs.kmp.observableviewmodel.core)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.koin.core)
         }
 
         androidMain.dependencies {

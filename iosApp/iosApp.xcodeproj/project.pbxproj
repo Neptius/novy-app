@@ -11,6 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		B01EA3C32D8C59D500968EC3 /* KMPObservableViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = B01EA3C22D8C59D500968EC3 /* KMPObservableViewModelCore */; };
+		B01EA3C52D8C59D500968EC3 /* KMPObservableViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B01EA3C42D8C59D500968EC3 /* KMPObservableViewModelSwiftUI */; };
+		B01EA3C72D8C5B1E00968EC3 /* KMPObservableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01EA3C62D8C5B1400968EC3 /* KMPObservableViewModel.swift */; };
 		B02DBEA22D8ACC55008C0D4E /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */; };
 		B0E697482D8AD0F7003897AB /* DebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E697472D8AD0ED003897AB /* DebugScreen.swift */; };
 		B0E6974B2D8AE897003897AB /* TodosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6974A2D8AE88D003897AB /* TodosScreen.swift */; };
@@ -24,6 +27,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		B01EA3C62D8C5B1400968EC3 /* KMPObservableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPObservableViewModel.swift; sourceTree = "<group>"; };
 		B02DBEA12D8ACC3D008C0D4E /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		B0E697472D8AD0ED003897AB /* DebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugScreen.swift; sourceTree = "<group>"; };
 		B0E6974A2D8AE88D003897AB /* TodosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosScreen.swift; sourceTree = "<group>"; };
@@ -34,6 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B01EA3C32D8C59D500968EC3 /* KMPObservableViewModelCore in Frameworks */,
+				B01EA3C52D8C59D500968EC3 /* KMPObservableViewModelSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +82,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				B01EA3C62D8C5B1400968EC3 /* KMPObservableViewModel.swift */,
 				B0E697492D8AE87A003897AB /* Screens */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -122,6 +129,8 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				B01EA3C22D8C59D500968EC3 /* KMPObservableViewModelCore */,
+				B01EA3C42D8C59D500968EC3 /* KMPObservableViewModelSwiftUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* NovyApp.app */;
@@ -153,6 +162,8 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
+				B01EA3C02D8C58B100968EC3 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
+				B01EA3C12D8C59D500968EC3 /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -203,6 +214,7 @@
 			files = (
 				B02DBEA22D8ACC55008C0D4E /* DebugView.swift in Sources */,
 				B0E6974B2D8AE897003897AB /* TodosScreen.swift in Sources */,
+				B01EA3C72D8C5B1E00968EC3 /* KMPObservableViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				B0E697482D8AD0F7003897AB /* DebugScreen.swift in Sources */,
@@ -410,6 +422,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B01EA3C02D8C58B100968EC3 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		B01EA3C12D8C59D500968EC3 /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMP-ObservableViewModel.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B01EA3C22D8C59D500968EC3 /* KMPObservableViewModelCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B01EA3C12D8C59D500968EC3 /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelCore;
+		};
+		B01EA3C42D8C59D500968EC3 /* KMPObservableViewModelSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B01EA3C12D8C59D500968EC3 /* XCRemoteSwiftPackageReference "KMP-ObservableViewModel" */;
+			productName = KMPObservableViewModelSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }
