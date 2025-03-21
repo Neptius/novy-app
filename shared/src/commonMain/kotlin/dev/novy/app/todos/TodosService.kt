@@ -17,7 +17,6 @@ class TodosService(
             httpClient
                 .get(url)
                 .body()
-        println(url)
 
         return response.todos
     }

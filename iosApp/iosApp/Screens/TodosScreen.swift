@@ -1,17 +1,17 @@
+import Shared
 import SwiftUI
 import KMPObservableViewModelSwiftUI
-import Shared
 
 struct TodosScreen: View {
-    
-    @StateViewModel var viewModel = TodosViewModel()
+
+    @EnvironmentViewModel var viewModel: TodosViewModel
     
     var body: some View {
         VStack {
             AppBar()
             
             if viewModel.todosState.loading {
-                Loader()
+                ProgressView()
             }
             
             if let error = viewModel.todosState.error {
@@ -27,45 +27,36 @@ struct TodosScreen: View {
                     }
                 }
             }
+        }.onAppear {
+            viewModel.getTodos()
         }
     }
-}
-
-struct AppBar: View {
-    var body: some View {
+    
+    
+    private func AppBar() -> some View {
         Text("Todos")
             .font(.largeTitle)
             .fontWeight(.bold)
     }
-}
-
-struct TodoItemView: View {
-    var todo: Todo
     
-    @StateViewModel var viewModel = TodosViewModel()
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(todo.title)
-                .font(.title)
-                .fontWeight(.bold)
-                .onTapGesture {
+    private func TodoItemView(todo: Todo) -> some View {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(todo.title)
+                    .font(.title)
+                    .fontWeight(.bold)
+                Text(todo.description_)
+                Button {
                     viewModel.removeTodo(title: todo.title)
+                } label: {
+                    Text("Done")
+                        .bold()
                 }
-            Text(todo.description_)
-        }
+            }
     }
-}
 
-struct Loader: View {
-    var body: some View {
-        ProgressView()
-    }
-}
 
-struct ErrorMessage: View {
-    var message: String
-    var body: some View {
+    private func ErrorMessage(message: String) -> some View {
         Text(message)
             .font(.title)
     }

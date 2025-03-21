@@ -1,13 +1,16 @@
 import SwiftUI
+import KMPObservableViewModelSwiftUI
 import Shared
 
 struct ContentView: View {
-    
     @State private var shouldOpenDebug = false
+    
+    var todoViewModel = TodosViewModel()
     
     var body: some View {
         NavigationStack {
             TodosScreen()
+                .environmentViewModel(todoViewModel)
                 .toolbar {
                     ToolbarItem {
                         Button {
