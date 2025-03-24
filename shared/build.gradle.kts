@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.serialization") version "2.1.10"
     id("com.google.devtools.ksp") version "2.1.10-1.0.29"
     id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-39"
+    id("io.github.ttypic.swiftklib") version "0.6.4"
 }
 
 kotlin {
