@@ -18,6 +18,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,8 +39,11 @@ fun TodosScreen(
     onDebugButtonClick: () -> Unit,
     todosViewModel: TodosViewModel = koinViewModel()
 ) {
-
     val todosState = todosViewModel.todosState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        todosViewModel.getTodos()
+    }
 
     Column {
         AppBar(onDebugButtonClick)
