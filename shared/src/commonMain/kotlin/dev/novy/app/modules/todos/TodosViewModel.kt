@@ -1,4 +1,4 @@
-package dev.novy.app.todos
+package dev.novy.app.modules.todos
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.rickclephas.kmp.observableviewmodel.*

@@ -3,7 +3,7 @@ package dev.novy.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import dev.novy.app.di.initKoin
+import dev.novy.app.infra.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import androidx.compose.runtime.Composable

@@ -21,7 +21,7 @@ import org.koin.compose.koinInject
 
 @Composable
 @Preview
-fun DebugScreen(
+fun PhoenixScreen(
     onUpButtonClick: () -> Unit,
 ) {
     MaterialTheme {
@@ -37,7 +37,7 @@ private fun Toolbar(
     onUpButtonClick: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text("Debug Screen") },
+        title = { Text("Phoenix Channels") },
         actions = {
             IconButton(onClick = onUpButtonClick) {
                 Icon(

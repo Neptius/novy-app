@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.novy.app.screens.DebugScreen
+import dev.novy.app.screens.PhoenixScreen
 import dev.novy.app.screens.TodosScreen
 import dev.novy.app.screens.Screens
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -46,12 +47,23 @@ fun AppNavHost(
             TodosScreen(
                 onDebugButtonClick = {
                     navController.navigate(Screens.DEBUG.route)
+                },
+                onPhoenixButtonClick = {
+                    navController.navigate(Screens.PHOENIX.route)
                 }
             )
         }
 
         composable(Screens.DEBUG.route) {
             DebugScreen(
+                onUpButtonClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Screens.PHOENIX.route) {
+            PhoenixScreen(
                 onUpButtonClick = {
                     navController.popBackStack()
                 }

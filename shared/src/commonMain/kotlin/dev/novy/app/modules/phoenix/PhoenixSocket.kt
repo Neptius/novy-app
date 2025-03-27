@@ -1,32 +1,25 @@
-package dev.novy.app.phoenixchannel
+package dev.novy.app.modules.phoenix
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
-import io.ktor.websocket.close
+import io.ktor.websocket.*
 
-class PhoenixSocket(private val url: String) {
+class PhoenixSocket(
+    private val url: String,
+    private val httpClient: HttpClient
+) {
     private val channels = listOf<PhoenixChannel>()
     private lateinit var session: DefaultClientWebSocketSession
     private var ref: Int = 0
 
-    private val client = HttpClient(CIO) {
-        install(WebSockets)
-    }
-
-    @NativeCoroutines
     suspend fun connect() {
-        client.webSocket(url) {
-            session = this
-            println("Connecting to $url")
-        }
+        println("Connecting to $url")
+        session = httpClient.webSocketSession(url)
     }
 
-    @NativeCoroutines
     suspend fun disconnect() {
         session.close()
-        client.close()
         println("Disconnecting from $url")
     }
 

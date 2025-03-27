@@ -1,4 +1,4 @@
-package dev.novy.app.todos
+package dev.novy.app.modules.todos
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

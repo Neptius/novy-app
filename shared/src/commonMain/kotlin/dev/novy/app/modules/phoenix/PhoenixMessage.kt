@@ -1,4 +1,4 @@
-package dev.novy.app.phoenixchannel
+package dev.novy.app.modules.phoenix
 
 import kotlinx.serialization.json.*
 

@@ -1,4 +1,4 @@
-package dev.novy.app.phoenixchannel
+package dev.novy.app.modules.phoenix
 
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
@@ -28,6 +28,6 @@ class PhoenixChannel(
 
     @NativeCoroutines
     suspend fun sendMessage() {
-        session.send()
+        // session.send()
     }
 }

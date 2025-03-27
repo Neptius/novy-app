@@ -1,4 +1,4 @@
-package dev.novy.app.todos
+package dev.novy.app.modules.todos
 
 import org.koin.core.component.KoinComponent
 

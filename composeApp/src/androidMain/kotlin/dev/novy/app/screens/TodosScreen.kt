@@ -27,16 +27,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.novy.app.todos.Todo
-import dev.novy.app.todos.TodosViewModel
+import dev.novy.app.modules.todos.Todo
+import dev.novy.app.modules.todos.TodosViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import androidx.fragment.app.viewModels
 
 @Composable
 @Preview
 fun TodosScreen(
     onDebugButtonClick: () -> Unit,
+    onPhoenixButtonClick: () -> Unit,
     todosViewModel: TodosViewModel = koinViewModel()
 ) {
     val todosState = todosViewModel.todosState.collectAsState()
@@ -46,7 +46,7 @@ fun TodosScreen(
     }
 
     Column {
-        AppBar(onDebugButtonClick)
+        AppBar(onDebugButtonClick, onPhoenixButtonClick)
         if (todosState.value.loading)
             Loader()
         else if (todosState.value.error != null)
@@ -59,6 +59,7 @@ fun TodosScreen(
 @Composable
 private fun AppBar(
     onDebugButtonClick: () -> Unit,
+    onPhoenixButtonClick: () -> Unit,
 ) {
     TopAppBar(
         title = { Text("Todos") },
@@ -67,6 +68,12 @@ private fun AppBar(
                 Icon(
                     imageVector = Icons.Outlined.Info,
                     contentDescription = "Debug Info Button",
+                )
+            }
+            IconButton(onClick = onPhoenixButtonClick) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = "Phoenix Channels Button",
                 )
             }
         }

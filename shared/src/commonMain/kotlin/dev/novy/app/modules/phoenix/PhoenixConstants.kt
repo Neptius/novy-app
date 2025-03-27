@@ -1,4 +1,4 @@
-package dev.novy.app.phoenixchannel
+package dev.novy.app.modules.phoenix
 
 object PhoenixConstants {
     const val TIMEOUT = 10000
