@@ -16,6 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,8 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 @Preview
 fun TodosScreen(
-    onDebugButtonClick: () -> Unit,
-    onPhoenixButtonClick: () -> Unit,
+    onUpButtonClick: () -> Unit,
     todosViewModel: TodosViewModel = koinViewModel()
 ) {
     val todosState = todosViewModel.todosState.collectAsState()
@@ -46,7 +46,7 @@ fun TodosScreen(
     }
 
     Column {
-        AppBar(onDebugButtonClick, onPhoenixButtonClick)
+        AppBar(onUpButtonClick)
         if (todosState.value.loading)
             Loader()
         else if (todosState.value.error != null)
@@ -58,22 +58,15 @@ fun TodosScreen(
 
 @Composable
 private fun AppBar(
-    onDebugButtonClick: () -> Unit,
-    onPhoenixButtonClick: () -> Unit,
+    onUpButtonClick: () -> Unit,
 ) {
     TopAppBar(
         title = { Text("Todos") },
         actions = {
-            IconButton(onClick = onDebugButtonClick) {
+            IconButton(onClick = onUpButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = "Debug Info Button",
-                )
-            }
-            IconButton(onClick = onPhoenixButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = "Phoenix Channels Button",
+                    imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                    contentDescription = "Up Button",
                 )
             }
         }

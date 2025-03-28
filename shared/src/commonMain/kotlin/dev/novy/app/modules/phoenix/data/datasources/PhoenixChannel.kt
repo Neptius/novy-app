@@ -1,16 +1,16 @@
-package dev.novy.app.modules.phoenix
+package dev.novy.app.modules.phoenix.data.datasources
 
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
+import io.ktor.websocket.Frame
 
 class PhoenixChannel(
-    private val topic: String,
+    internal val topic: String,
     private val session: DefaultClientWebSocketSession
 ) {
 
     private val ref = 0
 
-    fun join() {
+    suspend fun join() {
         println("Joining channel $topic")
     }
 
@@ -24,10 +24,5 @@ class PhoenixChannel(
 
     fun on(event: String, callback: (Map<String, Any>) -> Unit) {
         println("Listening for event $event on channel $topic")
-    }
-
-    @NativeCoroutines
-    suspend fun sendMessage() {
-        // session.send()
     }
 }

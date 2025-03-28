@@ -1,32 +1,32 @@
 package dev.novy.app.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import dev.novy.app.Platform
+import dev.novy.app.modules.phoenix.presentation.viewmodel.PhoenixViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.koinInject
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 @Preview
 fun PhoenixScreen(
-    onUpButtonClick: () -> Unit,
+    onDebugButtonClick: () -> Unit,
+    onPhoenixButtonClick: () -> Unit,
 ) {
     MaterialTheme {
         Column {
-            Toolbar(onUpButtonClick)
+            Toolbar(onDebugButtonClick, onPhoenixButtonClick)
             Content()
         }
     }
@@ -34,15 +34,22 @@ fun PhoenixScreen(
 
 @Composable
 private fun Toolbar(
-    onUpButtonClick: () -> Unit,
+    onDebugButtonClick: () -> Unit,
+    onPhoenixButtonClick: () -> Unit,
 ) {
     TopAppBar(
         title = { Text("Phoenix Channels") },
         actions = {
-            IconButton(onClick = onUpButtonClick) {
+            IconButton(onClick = onDebugButtonClick) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                    contentDescription = "Up Button",
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = "Debug Info Button",
+                )
+            }
+            IconButton(onClick = onPhoenixButtonClick) {
+                Icon(
+                    imageVector = Icons.Outlined.Info,
+                    contentDescription = "Phoenix Channels Button",
                 )
             }
         }
@@ -50,43 +57,53 @@ private fun Toolbar(
 }
 
 @Composable
-private fun Content() {
-    val items = makeItems()
-
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth()
+private fun Content(
+    phoenixViewModel: PhoenixViewModel = koinViewModel()
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(items) { row ->
-            RowView(title = row.first, subTitle = row.second)
+        Button(
+            onClick = {
+                phoenixViewModel.start()
+            }
+        ) {
+            Text("START")
+        }
+
+        Button(
+            onClick = {
+                phoenixViewModel.join()
+            },
+        ) {
+            Text("JOIN")
+        }
+
+        Button(
+            onClick = {
+                phoenixViewModel.ping()
+            },
+        ) {
+            Text("SEND PING")
+        }
+
+        Button(
+            onClick = {
+                phoenixViewModel.stop()
+            },
+        ) {
+            Text("STOP")
+        }
+
+        Button(
+            onClick = {
+                phoenixViewModel.info()
+            },
+        ) {
+            Text("INFO")
         }
     }
-
 }
 
-@Composable
-private fun makeItems(): List<Pair<String, String>> {
-    val platform = koinInject<Platform>()
-    platform.logSystemInfo()
-
-    return listOf(
-        Pair("OS", "${platform.osName} ${platform.osVersion}"),
-        Pair("Device", platform.deviceModel),
-        Pair("Density", "${platform.density}")
-    )
-}
-
-@Composable
-private fun RowView(title: String, subTitle: String) {
-    Column {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1,
-            color = Color.Gray,
-        )
-        Text(
-            text = subTitle,
-            style = MaterialTheme.typography.body2,
-        )
-    }
-    Divider()
-}

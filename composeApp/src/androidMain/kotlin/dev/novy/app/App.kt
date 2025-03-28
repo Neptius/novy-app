@@ -40,11 +40,11 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.TODOS.route,
+        startDestination = Screens.PHOENIX.route,
         modifier = modifier,
     ) {
-        composable(Screens.TODOS.route) {
-            TodosScreen(
+        composable(Screens.PHOENIX.route) {
+            PhoenixScreen(
                 onDebugButtonClick = {
                     navController.navigate(Screens.DEBUG.route)
                 },
@@ -54,16 +54,16 @@ fun AppNavHost(
             )
         }
 
-        composable(Screens.DEBUG.route) {
-            DebugScreen(
+        composable(Screens.TODOS.route) {
+            TodosScreen(
                 onUpButtonClick = {
                     navController.popBackStack()
                 }
             )
         }
 
-        composable(Screens.PHOENIX.route) {
-            PhoenixScreen(
+        composable(Screens.DEBUG.route) {
+            DebugScreen(
                 onUpButtonClick = {
                     navController.popBackStack()
                 }
