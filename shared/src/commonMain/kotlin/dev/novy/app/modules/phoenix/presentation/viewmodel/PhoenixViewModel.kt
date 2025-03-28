@@ -25,7 +25,8 @@ open class PhoenixViewModel : ViewModel(), KoinComponent {
     fun start() {
         viewModelScope.coroutineScope.launch {
             println("PhoenixViewModel: start()")
-            phoenixUseCase.connect()
+            val connected = phoenixUseCase.connect()
+            _phoenixState.update { it.copy(connected = connected) }
         }
     }
 
@@ -33,6 +34,7 @@ open class PhoenixViewModel : ViewModel(), KoinComponent {
         viewModelScope.coroutineScope.launch {
             println("PhoenixViewModel: stop()")
             phoenixUseCase.disconnect()
+            _phoenixState.update { it.copy(connected = false) }
         }
     }
 
