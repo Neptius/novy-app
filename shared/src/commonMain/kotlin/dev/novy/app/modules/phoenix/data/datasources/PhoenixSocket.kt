@@ -1,17 +1,20 @@
 package dev.novy.app.modules.phoenix.data.datasources
 
-import PhoenixMessage
 import dev.novy.app.modules.phoenix.PhoenixMessage
 import dev.novy.app.modules.phoenix.data.datasources.PhoenixChannel
+import dev.novy.app.modules.phoenix.toFrame
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
 import io.ktor.client.plugins.websocket.webSocketSession
 import io.ktor.websocket.Frame
 import io.ktor.websocket.close
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
+
 
 class PhoenixSocket(
     private val httpClient: HttpClient
@@ -75,11 +78,11 @@ class PhoenixSocket(
         }
     }
 
+    // COROUTINE
     private fun startHeartbeat() {
         heartbeatJob?.cancel()
-        heartbeatJob = CoroutineScope(coroutineContext).launch {
+        heartbeatJob = launch {
             while (connected) {
-                delay(heartbeatInterval)
                 heartbeat()
             }
         }
@@ -87,20 +90,29 @@ class PhoenixSocket(
 
     private suspend fun heartbeat() {
         println("Sending heartbeat")
-
+        sendMessage(
+            topic = "phoenix",
+            event = "heartbeat",
+            payload = emptyMap()
+        )
     }
 
-    fun sendMessage(msg: PhoenixMessage) {
+    suspend fun sendMessage(topic: String, event: String, payload: Map<String, Any>) {
         if (!connected) {
             throw IllegalStateException("Socket is not connected")
         }
 
-        val message = msg.copy(
-            messageReference = makeRef()
+        val session = session ?: throw IllegalStateException("Socket session is null")
+
+        val message = PhoenixMessage(
+            joinReference = null,
+            messageReference = makeRef(),
+            topicName = topic,
+            eventName = event,
+            payload = payload
         )
 
-        val frame = Frame.Text(Json.encodeToString(PhoenixMessage.serializer(), message))
-        session?.send(frame)
+        session.send(frame = Frame.Text(message.toString()))
     }
 
     private fun makeRef(): String {
