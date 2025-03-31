@@ -2,7 +2,6 @@ package dev.novy.app.modules.phoenix.data.datasources
 
 import dev.novy.app.modules.phoenix.PhoenixMessage
 import dev.novy.app.modules.phoenix.data.datasources.PhoenixChannel
-import dev.novy.app.modules.phoenix.toFrame
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
 import io.ktor.client.plugins.websocket.webSocketSession
@@ -80,12 +79,7 @@ class PhoenixSocket(
 
     // COROUTINE
     private fun startHeartbeat() {
-        heartbeatJob?.cancel()
-        heartbeatJob = launch {
-            while (connected) {
-                heartbeat()
-            }
-        }
+
     }
 
     private suspend fun heartbeat() {
